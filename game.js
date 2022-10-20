@@ -1,22 +1,32 @@
 const character = {
 
-    attack: (target) => {
+    attack(target) {
         console.log(`${target.name} takes damage`)
     },
 
-    heal: (target) => {
+    heal(target) {
         console.log(`${target.name} player is healed`)
-    }
+    },
+
+    changeName(newName) {
+        this.name = newName
+    },
 }
   
-const player1 = Object.create(character, {
-    name: {value: 'player 1'}
-})
+function Player(name) {
+    this.name = name
+}
 
-const player2 = Object.create(character, {
-    name: {value: 'player 2'}
-})
+Object.assign(Player.prototype, character)
+
+const player1 = new Player('player1')
+
+const player2 = new Player('player2')
 
 player1.attack(player2)
 
 player2.heal(player2)
+
+player1.changeName('player3')
+
+player1.heal(player1)
